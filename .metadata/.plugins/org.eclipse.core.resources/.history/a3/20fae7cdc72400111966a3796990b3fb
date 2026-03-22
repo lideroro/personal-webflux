@@ -1,0 +1,5 @@
+package com.personal_webflux.entity;
+
+public class Personal {
+
+}

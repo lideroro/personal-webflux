@@ -1,0 +1,47 @@
+package com.personal_webflux.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.personal_webflux.entity.Personal;
+import com.personal_webflux.service.PersonalService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@RequestMapping("/Personal")
+@Slf4j
+@RequiredArgsConstructor
+public class PersonalController {
+
+	private final PersonalService personalService = new PersonalService();
+	
+	@GetMapping
+	public Flux<Personal> getAll() {
+		return personalService.getAll();
+	}
+	
+	@GetMapping("/{id}")
+	public Mono<Personal> getById(@PathVariable("id") int id) {
+		return personalService.getById(id);
+	}
+	
+	@PostMapping
+	public Mono<Personal> save(@RequestBody Personal personal) {
+		return personalService.save(personal);
+	}
+	
+	@PutMapping("/{id}")
+	public Mono<Personal> update(@PathVariable("id") int id, @RequestBody Personal personal) {
+		return personalService.update(id, personal);
+	}	
+	
+}

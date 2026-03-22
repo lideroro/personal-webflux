@@ -1,0 +1,6 @@
+spring.application.name=personal-webflux
+spring.r2dbc.url= mysql://localhost:3308/elegpits_winkardex
+spring.r2dbc.username=root
+spring.r2dbc.password=admin
+
+server.error.include-message=

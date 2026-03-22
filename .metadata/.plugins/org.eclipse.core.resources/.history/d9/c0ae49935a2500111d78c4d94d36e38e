@@ -1,0 +1,47 @@
+package com.personal_webflux.service;
+
+import org.springframework.stereotype.Service;
+
+
+import com.personal_webflux.repository.PersonalRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class PersonalService {
+
+	private PersonalRepository personalRepository;
+	
+	public Flux<Personal> getAll() {
+		return personalRepository.findAll();
+	}
+	
+	public Mono<Personal> getById(int id) {
+		return personalRepository.findById(id);
+	}
+	
+	public Mono<Personal> save(Personal personal) {
+		return personalRepository.save(personal);
+	}
+	
+	public Mono<Personal> update(int id, Personal personal) {
+		return personalRepository.save(	new Personal(
+					id, 
+					personal.getNombre(), 
+					personal.getDireccion()
+				)
+			);
+	}
+	
+	public Mono<Void> delete(int id) {
+		return personalRepository.deleteById(id);
+	}
+	
+	
+	
+}

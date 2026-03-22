@@ -1,0 +1,23 @@
+package com.personal_webflux.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
+
+import io.r2dbc.spi.ConnectionFactory;
+import lombok.extern.slf4j.Slf4j;
+
+@Configuration
+@Slf4j
+public class DBConfig extends AbstractR2dbcConfiguration{
+
+	private String dbURL;
+	@Value("${spring.r2dbc.url}")
+	
+	@Override
+	public ConnectionFactory connectionFactory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+}

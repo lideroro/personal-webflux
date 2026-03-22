@@ -1,0 +1,90 @@
+package com.personal_webflux.entity;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Table
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class Personal {
+
+	@Id
+	private int Id;
+	private String NOMBRE;
+	private String DIRECCION;
+	
+
+	public Personal(int id, String nombre, String direccion) {
+		Id = id;
+		NOMBRE = nombre;
+		DIRECCION = direccion;
+	}
+	
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
+	public String getNOMBRE() {
+		return NOMBRE;
+	}
+	public void setNOMBRE(String nOMBRE) {
+		NOMBRE = nOMBRE;
+	}
+	public String getDIRECCION() {
+		return DIRECCION;
+	}
+	public void setDIRECCION(String dIRECCION) {
+		DIRECCION = dIRECCION;
+	}
+	
+/*	
+	public Personal(int id, String nombre, String direccion) {
+		
+		Id = id;
+		NOMBRE = nombre;
+		DIRECCION = direccion;
+				
+	}
+	
+*/	
+
+/*		
+	@Override
+	public String toString() {
+		return "Personal [id=" + Id + ", nombre=" + NOMBRE + ", direccion=" + DIRECCION + "]";
+	}
+
+	/*
+/*	
+	private String region;
+	private String provincia;
+	private String distrito;
+	private String pais;
+	private String docidentidad;
+	private String idruc;
+	private String fecha_ing;
+	private String Fecha_Nac;
+	private String telefono;
+	
+	  `MOVIL` char(12) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+	  `EMAIL` char(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+	  `PROFESION` varchar(2) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+	  `AREATRABAJO` varchar(2) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+	  `ACTIVO` int DEFAULT '1',
+	  `REGISTRO` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	  `USUARIO` int(10) unsigned zerofill DEFAULT '0000000001',
+	  `IMAGEN` blob,
+	  `OLD_ID` int unsigned DEFAULT NULL,
+	  `SW` int unsigned NOT NULL DEFAULT '1'
+*/	
+	
+	
+	
+}

@@ -1,0 +1,8 @@
+package com.personal_webflux.repository;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PersonalRepository extends ReactiveCrudRepositopry<Personal, Integer>  {
+
+}

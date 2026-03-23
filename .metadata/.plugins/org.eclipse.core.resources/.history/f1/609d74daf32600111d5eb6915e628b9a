@@ -1,0 +1,20 @@
+package com.personal_webflux;
+
+/**
+ * @author 		: Ing. Pablo Uceda
+ * @Fecha  		: 10/03/2026
+ * @Comentario	: Programa principal que da inicia al servicio. 
+ * @version		: 1.0
+ */
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class PersonalWebfluxApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PersonalWebfluxApplication.class, args);
+	}
+
+}

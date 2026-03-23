@@ -1,5 +1,13 @@
 package com.personal_webflux.controller;
 
+/**
+ * @author 		: Ing. Pablo Uceda
+ * @Fecha  		: 10/03/2026
+ * @Comentario	: Programa Controlle listado, adiciona, actualiza, elimina en la tabla de PERSONAL.
+ *                usandio Web-Flux. 
+ * @version		: 1.0
+ */
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

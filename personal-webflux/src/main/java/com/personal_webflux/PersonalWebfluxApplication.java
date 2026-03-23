@@ -1,5 +1,12 @@
 package com.personal_webflux;
 
+/**
+ * @author 		: Ing. Pablo Uceda
+ * @Fecha  		: 10/03/2026
+ * @Comentario	: Programa principal que da inicia al servicio usando Web-Flux. 
+ * @version		: 1.0
+ */
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

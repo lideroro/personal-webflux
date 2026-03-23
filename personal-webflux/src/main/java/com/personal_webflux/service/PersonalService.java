@@ -1,5 +1,12 @@
 package com.personal_webflux.service;
 
+/****************
+ * @author 		: Ing. Pablo Uceda
+ * @Fecha  		: 10/03/2026
+ * @Comentario	: Programa para configurar el SERVICE con Web-Flux.. 
+ * @version		: 1.0
+ ****************/
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

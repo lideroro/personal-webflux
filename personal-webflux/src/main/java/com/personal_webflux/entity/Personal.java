@@ -1,5 +1,11 @@
 package com.personal_webflux.entity;
 
+/**
+ * @author 		: Ing. Pablo Uceda
+ * @Fecha  		: 10/03/2026
+ * @Comentario	: Programa para la configuracion de tabla de PERSONAL, usando Web-Flux. 
+ * @version		: 1.0
+ */
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 

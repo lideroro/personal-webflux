@@ -1,5 +1,12 @@
 package com.personal_webflux.config;
 
+/**
+ * @author 		: Ing. Pablo Uceda
+ * @Fecha  		: 10/03/2026
+ * @Comentario	: Programa para la configuracion de acceso base de datos, usando Web-Flux. 
+ * @version		: 1.0
+ */
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -33,11 +33,15 @@ public class PersonalService {
 	
 	public Mono<Personal> update(int id, Personal personal) {
 
-		return personalRepository.save(personal);
-//		return personalRepository.save(new Personal(id, personal.getNOMBRE(), personal.getDIRECCION()));	
-
-		//new Personal(id, personal.getNombre(), personal.getDireccion()));
+		  return personalRepository.findById(id)
+			        .flatMap(p -> {
+			            p.setNOMBRE(personal.getNOMBRE());
+			            p.setDIRECCION(personal.getDIRECCION());
+			            return personalRepository.save(p);
+			        });		
+		
 	}
+	
 	
 	public Mono<Void> delete(int id) {
 		return personalRepository.deleteById(id);

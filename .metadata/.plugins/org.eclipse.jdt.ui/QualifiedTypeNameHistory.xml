@@ -2,4 +2,6 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="io.r2dbc.spi.ConnectionFactories"/>
     <fullyQualifiedTypeName name="com.personal_webflux.repository.PersonalRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.web.reactive.function.server.ServerResponse"/>
+    <fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
 </qualifiedTypeNameHistroy>

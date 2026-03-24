@@ -1,0 +1,58 @@
+package com.personal_webflux.service;
+
+/****************
+ * @author 		: Ing. Pablo Uceda
+ * @Fecha  		: 10/03/2026
+ * @Comentario	: Programa para configurar el SERVICE con Web-Flux.. 
+ * @version		: 1.0
+ ****************/
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.personal_webflux.entity.Personal;
+import com.personal_webflux.repository.PersonalRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class PersonalService {
+
+	private final PersonalRepository personalRepository = null;
+	
+	public Flux<Personal> getAll() {
+		return personalRepository.findAll();
+	}
+	
+	public Mono<Personal> getById(int id) {
+		return personalRepository.findById(id);
+	}
+	
+	public Mono<Personal> save(Personal personal) {
+		return personalRepository.save(personal);
+	}
+	
+	public Mono<Personal> update(int id, Personal personal) {
+
+		  return personalRepository.findById(id)
+			        .flatMap(p -> {
+			            p.setNOMBRE(personal.getNOMBRE());
+			            p.setDIRECCION(personal.getDIRECCION());
+			            return personalRepository.save(p);
+			        });		
+		
+	}
+	
+	
+	public Mono<Void> delete(int id) {
+		return personalRepository.deleteById(id);
+	}
+	
+	
+	
+}

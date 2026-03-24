@@ -1,0 +1,5 @@
+package com.personal_webflux.router;
+
+public class PersonalRouter {
+
+}

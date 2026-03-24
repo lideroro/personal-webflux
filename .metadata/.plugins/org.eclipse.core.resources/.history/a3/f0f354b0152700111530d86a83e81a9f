@@ -1,0 +1,66 @@
+package com.personal_webflux.service;
+
+/****************
+ * @author 		: Ing. Pablo Uceda
+ * @Fecha  		: 10/03/2026
+ * @Comentario	: Programa para configurar el SERVICE con Web-Flux.. 
+ * @version		: 1.1
+ ****************/
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.personal_webflux.entity.Personal;
+import com.personal_webflux.repository.PersonalRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class PersonalService {
+
+	@Autowired
+	private PersonalRepository personalRepository;
+		
+	public Flux<Personal> getAll() {return personalRepository.findAll();}
+	
+	public Mono<Personal> getById(int id) {
+		return personalRepository.findById(id)
+				.switchIfEmpty(Mono.error( new Exception("Personal no encontrado")))
+				;
+	}
+	
+	public Mono<Personal> save(Personal personal) {
+		Mono<Boolean> existsNOMBRE = personalRepository.findByNOMBRE(personal.getNOMBRE()).hasElement();
+		return existsNOMBRE.flatMap(exists -> exists ? Mono.error(new Exception("Nombre de Personal ya se encuentra en uso"))
+				: personalRepository.save(personal));
+	}
+	
+	public Mono<Personal> update(int id, Personal personal) {
+
+		Mono<Boolean> personalId = personalRepository.findById(id).hasElement();
+		Mono<Boolean> personalRepeateNombre = personalRepository.findByNOMBRE(id, personal.getNOMBRE());
+/*		
+		  return personalRepository.findById(id)
+			        .flatMap(p -> {
+			            p.setNOMBRE(personal.getNOMBRE());
+			            p.setDIRECCION(personal.getDIRECCION());
+			            return personalRepository.save(p);
+			        });
+*/		  
+		  
+		
+	}
+	
+	
+	public Mono<Void> delete(int id) {
+		return personalRepository.deleteById(id);
+	}
+	
+	
+	
+}

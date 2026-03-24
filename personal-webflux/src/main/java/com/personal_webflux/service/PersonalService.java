@@ -4,7 +4,7 @@ package com.personal_webflux.service;
  * @author 		: Ing. Pablo Uceda
  * @Fecha  		: 10/03/2026
  * @Comentario	: Programa para configurar el SERVICE con Web-Flux.. 
- * @version		: 1.0
+ * @version		: 1.1
  ****************/
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,33 +25,59 @@ public class PersonalService {
 
 	@Autowired
 	private PersonalRepository personalRepository;
-	
-	public Flux<Personal> getAll() {
-		return personalRepository.findAll();
-	}
+		
+	public Flux<Personal> getAll() {return personalRepository.findAll();}
 	
 	public Mono<Personal> getById(int id) {
-		return personalRepository.findById(id);
+		return personalRepository.findById(id)
+				.switchIfEmpty(Mono.error( new Exception("Personal no encontrado")))
+				;
 	}
 	
 	public Mono<Personal> save(Personal personal) {
-		return personalRepository.save(personal);
+		Mono<Boolean> existsNOMBRE = personalRepository.findByNOMBRE(personal.getNOMBRE()).hasElement();
+		return existsNOMBRE.flatMap(exists -> exists ? Mono.error(new Exception("Nombre de Personal ya se encuentra en uso"))
+				: personalRepository.save(personal));
 	}
 	
 	public Mono<Personal> update(int id, Personal personal) {
 
+		Mono<Boolean> personalId = personalRepository.findById(id).hasElement();
+		Mono<Boolean> personalRepeateNombre = personalRepository.repeatedMOMBRE(id, personal.getNOMBRE()).hasElement();
+
+		return personalId.flatMap(
+				existsId -> existsId ?
+						personalRepeateNombre.flatMap(existsNOMBRE -> existsNOMBRE ? Mono.error(new Exception("Nombre de Personal ya se encuentra en uso")) 
+						: personalRepository.findById(id)
+				        .flatMap(p -> {
+				            p.setNOMBRE(personal.getNOMBRE());
+				            p.setDIRECCION(personal.getDIRECCION());
+				            return personalRepository.save(p);
+				        }))
+						: Mono.error(new Exception("Personal no encontrado")));
+
+		/*	
 		  return personalRepository.findById(id)
 			        .flatMap(p -> {
 			            p.setNOMBRE(personal.getNOMBRE());
 			            p.setDIRECCION(personal.getDIRECCION());
 			            return personalRepository.save(p);
-			        });		
+			        });
+*/		  
+		  
 		
 	}
 	
 	
 	public Mono<Void> delete(int id) {
+		
+		Mono<Boolean> personalId = personalRepository.findById(id).hasElement();
+		return personalId.flatMap(exists -> exists ? personalRepository.deleteById(id) : Mono.error(new Exception("Personal no encontrado")));
+		
+		
+		/*
 		return personalRepository.deleteById(id);
+		*/
 	}
 	
 	

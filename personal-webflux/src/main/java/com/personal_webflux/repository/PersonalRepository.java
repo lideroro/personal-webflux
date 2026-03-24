@@ -1,10 +1,12 @@
 package com.personal_webflux.repository;
 
+import org.springframework.data.r2dbc.repository.Query;
+
 /****************
  * @author 		: Ing. Pablo Uceda
  * @Fecha  		: 10/03/2026
  * @Comentario	: Programa de repositorio usando WebFlux. 
- * @version		: 1.0
+ * @version		: 1.1
  ****************/
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
@@ -12,7 +14,14 @@ import org.springframework.stereotype.Repository;
 
 import com.personal_webflux.entity.Personal;
 
+import reactor.core.publisher.Mono;
+
 @Repository
 public interface PersonalRepository extends ReactiveCrudRepository<Personal, Integer>  {
 
+	Mono<Personal> findByNOMBRE(String nombre);
+	
+	@Query ("SELECT * FROM personal WHERE Id <>:Id AND NOMBRE =:NOMBRE")
+	Mono<Personal> repeatedMOMBRE(int Id, String NOMBRE);
+	
 }

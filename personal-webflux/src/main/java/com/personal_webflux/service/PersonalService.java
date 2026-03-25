@@ -8,9 +8,11 @@ package com.personal_webflux.service;
  ****************/
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.personal_webflux.entity.Personal;
+import com.personal_webflux.exception.CustomException;
 import com.personal_webflux.repository.PersonalRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,9 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class PersonalService {
 
+	private final static String NF_MESSAGE = "Personal no encontrado";
+	private final static String NAME_MESSAGE = "Nombre de Personal ya se encuentra en uso";
+	
 	@Autowired
 	private PersonalRepository personalRepository;
 		
@@ -30,32 +35,28 @@ public class PersonalService {
 	
 	public Mono<Personal> getById(int id) {
 		return personalRepository.findById(id)
-				.switchIfEmpty(Mono.error( new Exception("Personal no encontrado")))
-				;
+				.switchIfEmpty(Mono.error( new CustomException(HttpStatus.NOT_FOUND, NF_MESSAGE)));
 	}
 	
 	public Mono<Personal> save(Personal personal) {
 		Mono<Boolean> existsNOMBRE = personalRepository.findByNOMBRE(personal.getNOMBRE()).hasElement();
-		return existsNOMBRE.flatMap(exists -> exists ? Mono.error(new Exception("Nombre de Personal ya se encuentra en uso"))
+		return existsNOMBRE.flatMap(exists -> exists ? Mono.error(new CustomException(HttpStatus.BAD_REQUEST, NAME_MESSAGE))
 				: personalRepository.save(personal));
 	}
 	
 	public Mono<Personal> update(int id, Personal personal) {
-
 		Mono<Boolean> personalId = personalRepository.findById(id).hasElement();
 		Mono<Boolean> personalRepeateNombre = personalRepository.repeatedMOMBRE(id, personal.getNOMBRE()).hasElement();
-
 		return personalId.flatMap(
 				existsId -> existsId ?
-						personalRepeateNombre.flatMap(existsNOMBRE -> existsNOMBRE ? Mono.error(new Exception("Nombre de Personal ya se encuentra en uso")) 
+						personalRepeateNombre.flatMap(existsNOMBRE -> existsNOMBRE ? Mono.error(new CustomException(HttpStatus.BAD_REQUEST, NAME_MESSAGE)) 
 						: personalRepository.findById(id)
 				        .flatMap(p -> {
 				            p.setNOMBRE(personal.getNOMBRE());
 				            p.setDIRECCION(personal.getDIRECCION());
 				            return personalRepository.save(p);
 				        }))
-						: Mono.error(new Exception("Personal no encontrado")));
-
+						: Mono.error(new CustomException(HttpStatus.NOT_FOUND, NF_MESSAGE)));
 		/*	
 		  return personalRepository.findById(id)
 			        .flatMap(p -> {
@@ -64,22 +65,10 @@ public class PersonalService {
 			            return personalRepository.save(p);
 			        });
 */		  
-		  
-		
 	}
-	
 	
 	public Mono<Void> delete(int id) {
-		
 		Mono<Boolean> personalId = personalRepository.findById(id).hasElement();
-		return personalId.flatMap(exists -> exists ? personalRepository.deleteById(id) : Mono.error(new Exception("Personal no encontrado")));
-		
-		
-		/*
-		return personalRepository.deleteById(id);
-		*/
-	}
-	
-	
-	
+		return personalId.flatMap(exists -> exists ? personalRepository.deleteById(id) : Mono.error(new CustomException(HttpStatus.NOT_FOUND, NF_MESSAGE)));
+	}	
 }

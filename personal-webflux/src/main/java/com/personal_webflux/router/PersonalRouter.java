@@ -1,10 +1,12 @@
 package com.personal_webflux.router;
 
+import org.springframework.boot.autoconfigure.web.WebProperties;
+
 /****************
  * @author 		: Ing. Pablo Uceda
  * @Fecha  		: 10/03/2026
  * @Comentario	: Programa para configurar el PersonalRouter con Web-Flux.. 
- * @version		: 1.0
+ * @version		: 1.1
  ****************/
 
 import org.springframework.context.annotation.Bean;
@@ -22,6 +24,11 @@ import lombok.extern.slf4j.Slf4j;
 public class PersonalRouter {
 	
 	private static final String PATH = "personal";
+	
+	@Bean
+	public WebProperties.Resources resources () {
+		return new WebProperties.Resources();
+	}
 	
 	@Bean
 	RouterFunction<ServerResponse> Router(PersonalHandler handler) {

@@ -4,7 +4,7 @@ package com.personal_webflux.handler;
  * @author 		: Ing. Pablo Uceda
  * @Fecha  		: 10/03/2026
  * @Comentario	: Programa para configurar PersonalHandler con Web-Flux.. 
- * @version		: 1.01
+ * @version		: 1.1
  ****************/
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,0 +1,13 @@
+package com.personal_webflux.exception;
+
+import org.springframework.http.HttpStatus;
+
+public class CustonException extends Exception {
+	
+	private HttpStatus status;
+	
+	public CustomException(String mensaje, HttpStartus status) {
+		
+	}
+
+}

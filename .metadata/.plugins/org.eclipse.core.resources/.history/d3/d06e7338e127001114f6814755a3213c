@@ -1,0 +1,13 @@
+package com.personal_webflux.exception;
+
+import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CustomAttributes extends DefaultErrorAttributes {
+
+	public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions) {
+		
+	}
+			
+}

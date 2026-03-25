@@ -3,5 +3,14 @@
     <fullyQualifiedTypeName name="io.r2dbc.spi.ConnectionFactories"/>
     <fullyQualifiedTypeName name="com.personal_webflux.repository.PersonalRepository"/>
     <fullyQualifiedTypeName name="org.springframework.web.reactive.function.server.ServerResponse"/>
+    <fullyQualifiedTypeName name="org.springframework.web.reactive.function.server.RouterFunctions"/>
+    <fullyQualifiedTypeName name="org.springframework.web.reactive.function.server.RequestPredicates"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.web.error.ErrorAttributeOptions"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
+    <fullyQualifiedTypeName name="org.springframework.web.reactive.function.BodyInserters"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.web.WebProperties"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.web.WebProperties.Resources"/>
+    <fullyQualifiedTypeName name="org.springframework.http.codec.ServerCodecConfigurer"/>
 </qualifiedTypeNameHistroy>
